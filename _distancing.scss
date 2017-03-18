@@ -1,0 +1,18 @@
+// distancing from the neighbor block
+@mixin distancing($margin, $side: bottom, $selector: '*') {
+
+  @each $s in $selector {
+    @if $side == bottom {
+      & + #{$s} {
+        margin-top: $margin;
+      }
+    } @else {
+      #{$s} + & {
+        margin-top: $margin;
+      }
+    }
+  }
+
+  & { margin-bottom: 0 }
+  &:first-child { margin-top: 0 }
+}
