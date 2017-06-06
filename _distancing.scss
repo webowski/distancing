@@ -1,18 +1,36 @@
 // distancing from the neighbor block
-@mixin distancing($margin, $side: bottom, $selector: '*') {
+@mixin distancing($margin, $side: both, $selector: '*') {
 
   @each $s in $selector {
-    @if $side == bottom {
+    @if $side == bottom { 
+      // bottom side
+
       & + #{$s} {
         margin-top: $margin;
       }
-    } @else {
+
+    } @elseif $side == top { 
+      // top side
+
       #{$s} + & {
         margin-top: $margin;
       }
+
+    } @else {
+      // both sides
+
+      & + #{$s} {
+        margin-top: $margin;
+      }
+
+      #{$s} + & {
+        margin-top: $margin;
+      }
+
     }
   }
 
-  & { margin-bottom: 0 }
+  & { margin-bottom: 0 !important }
+
   &:first-child { margin-top: 0 }
 }
